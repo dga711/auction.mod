@@ -40,6 +40,7 @@ namespace Auction.mod
        public Rect settakewtsgenlabel, settakewtsgenbutton, settakewtsgenlabel2, settakewtbgenlabel, settakewtbgenbutton, settakewtbgenlabel2;
        public Rect setwtsahlabel, setwtsahbutton, setwtsahlabel2, setwtsahlabel3, setwtsahlabel4, setwtbahlabel, setwtbahbutton, setwtbahlabel2, setwtbahlabel3, setwtbahlabel4, setwtsahbutton2, setwtbahbutton2;
        public Rect scrollpostbutton, scrollpostlabel1, scrollpostlabel2;
+       public Rect setdatasetlabel, setdatasetrect, setdatasetinfolabel;
        public float fieldHeight;
        public float scrollBarSize = 20f;
        public float costIconSize,costIconWidth,costIconHeight,cardHeight,cardWidth, labelsWidth, labelX;
@@ -432,6 +433,13 @@ namespace Auction.mod
             this.scrollpostlabel2 = new Rect(scrollpostbutton.xMax, setwtbbox.yMax + 4, lenfactor * vector2.x, texthight);
 
 
+            //dataset
+            vector2 = GUI.skin.label.CalcSize(new GUIContent("Dataset: "));
+            this.setdatasetlabel = new Rect(setowncardsanzbox.x, setwtbbox.yMax + 4, lenfactor * vector2.x, texthight);
+            vector2 = GUI.skin.label.CalcSize(new GUIContent("XXXXXXXXXXXX"));
+            this.setdatasetrect = new Rect(setdatasetlabel.xMax + 4, setdatasetlabel.y, lenfactor * vector2.x, texthight);
+            vector2 = GUI.skin.label.CalcSize(new GUIContent("(if dataset is new, you have to press save) "));
+            this.setdatasetinfolabel = new Rect(setdatasetrect.xMax + 4, setwtbbox.yMax + 4, lenfactor * vector2.x, texthight);
         }
 
 

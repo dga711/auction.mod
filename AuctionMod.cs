@@ -363,6 +363,7 @@ namespace Auction.mod
             vc = new VersionCheck();
             DateTime itze= DateTime.Now;
             helpf = Helpfunktions.Instance;
+            helpf.ownmodfolder = this.OwnFolder() + System.IO.Path.DirectorySeparatorChar;
             helpf.setOwnAucPath(this.OwnFolder() + System.IO.Path.DirectorySeparatorChar + "auc" + System.IO.Path.DirectorySeparatorChar);
             sttngs = Settings.Instance;
             srchsvr = Searchsettings.Instance;
@@ -378,6 +379,11 @@ namespace Auction.mod
             drawsubmenu = typeof(Store).GetMethod("drawSubMenu", BindingFlags.Instance | BindingFlags.NonPublic);
             chatLogStyleinfo = typeof(ChatUI).GetField("chatMsgStyle", BindingFlags.Instance | BindingFlags.NonPublic);
 
+            if (Directory.GetFiles(helpf.ownmodfolder, "*.txt").Contains(helpf.ownmodfolder + "settingsauc.txt"))//File.Exists() was slower
+            {
+                sttngs.loadsettings(helpf.deleteTime);
+            }
+
             Directory.CreateDirectory(helpf.ownaucpath);
             this.aucfiles = Directory.GetFiles(helpf.ownaucpath, "*auc.txt");
             if (aucfiles.Contains(helpf.ownaucpath + "wtsauc.txt"))//File.Exists() was slower
@@ -391,11 +397,6 @@ namespace Auction.mod
             if (aucfiles.Contains(helpf.ownaucpath + "nicauc.txt"))//File.Exists() was slower
             {
                 helpf.nicks = true;
-            }
-
-            if (aucfiles.Contains(helpf.ownaucpath + "settingsauc.txt"))//File.Exists() was slower
-            {
-                sttngs.loadsettings(helpf.ownaucpath,helpf.deleteTime);
             }
 
             try

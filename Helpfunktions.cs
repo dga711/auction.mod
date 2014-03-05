@@ -57,6 +57,7 @@ namespace Auction.mod
         public bool chatisshown = false;
         public bool canLoadWTSmsg = false;
         public bool canLoadWTBmsg = false;
+        public string ownmodfolder = String.Empty; // filled on mod load
         public string ownaucpath = Environment.CurrentDirectory + System.IO.Path.DirectorySeparatorChar + "auc" + System.IO.Path.DirectorySeparatorChar;
         
         public bool inauchouse = false;

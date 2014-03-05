@@ -60,10 +60,12 @@ namespace Auction.mod
         public string spampreventtime = "";
         public int spamprevint=0;
 
-        public void loadsettings(string ownaucpath, double deleteTime)
+        public string dataset = "auc";
+
+        public void loadsettings(double deleteTime)
         {
 
-            string text = System.IO.File.ReadAllText(ownaucpath + "settingsauc.txt");
+            string text = System.IO.File.ReadAllText(Helpfunktions.Instance.ownmodfolder + "settingsauc.txt");
             string[] txt = text.Split(';');
             foreach (string t in txt)
             {
@@ -146,6 +148,12 @@ namespace Auction.mod
                 {
                     scrollspostday = (ScrollsPostDayType)Convert.ToInt32(value);
                 }
+                if (setting.Equals("dataset"))
+                {
+                    value = (String.IsNullOrEmpty(value) ? "auc" : value);
+                    dataset = value;
+                    Helpfunktions.Instance.setOwnAucPath(Helpfunktions.Instance.ownmodfolder + dataset + System.IO.Path.DirectorySeparatorChar);
+                }
             }
 
         }
@@ -168,9 +176,10 @@ namespace Auction.mod
 			wtbGeneratorPriceType = ScrollsPostPriceType.LOWER;
 			wtsAHpriceType = wtsAHpriceType = wtsAHpriceType2 = wtbAHpriceType2 = ScrollsPostPriceType.SUGGESTED;
             scrollspostday = ScrollsPostDayType.one;
+            dataset = "auc";
         }
 
-        public void savesettings(string ownaucpath)
+        public void savesettings()
         {
             string text = "";
             text = text + "spam " + spampreventtime + ";";
@@ -190,7 +199,13 @@ namespace Auction.mod
 			text = text + "takeahb1 " + (int)wtbAHpriceType + ";";
 			text = text + "takeahb2 " + (int)wtbAHpriceType2 + ";";
             text = text + "scrollpostday " + (int)scrollspostday + ";";
-            System.IO.File.WriteAllText(ownaucpath + "settingsauc.txt", text);
+            text = text + "dataset " + dataset + ";";
+
+            // create dataset directory
+            System.IO.Directory.CreateDirectory(Helpfunktions.Instance.ownmodfolder + dataset);
+            Helpfunktions.Instance.setOwnAucPath(Helpfunktions.Instance.ownmodfolder + dataset + System.IO.Path.DirectorySeparatorChar);
+
+            System.IO.File.WriteAllText(Helpfunktions.Instance.ownmodfolder + "settingsauc.txt", text);
         }
 
 

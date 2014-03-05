@@ -91,7 +91,7 @@ namespace Auction.mod
             }
             if (GUI.Button(recto.setload, "Load"))
             {
-                sttngs.loadsettings(helpf.ownaucpath,helpf.deleteTime);
+                sttngs.loadsettings(helpf.deleteTime);
 
                 if (helpf.bothmenue || helpf.createAuctionMenu) recto.setupPositionsboth(helpf.chatisshown, sttngs.rowscale, helpf.chatLogStyle, helpf.cardListPopupSkin);
                 else recto.setupPositions(helpf.chatisshown, sttngs.rowscale, helpf.chatLogStyle, helpf.cardListPopupSkin);
@@ -99,7 +99,7 @@ namespace Auction.mod
             if (GUI.Button(recto.setsave, "Save"))
             {
                 //save stuff
-                sttngs.savesettings(helpf.ownaucpath);
+                sttngs.savesettings();
 
 
             }
@@ -295,6 +295,20 @@ namespace Auction.mod
 				GUI.Label(recto.setwtbahbutton, scrollsPostPriceTypeToString(sttngs.wtbAHpriceType));
                 GUI.skin.label.alignment = TextAnchor.MiddleLeft;
             }
+
+            //dataset
+            GUI.Label(recto.setdatasetlabel, "Dataset: ");
+            GUI.Label(recto.setdatasetinfolabel, "(if dataset is new, you have to press save)");
+            GUI.Box(recto.setdatasetrect, "");
+            GUI.skin = helpf.cardListPopupSkin;
+            helpf.chatLogStyle.alignment = TextAnchor.MiddleCenter;
+            GUI.Box(recto.setdatasetrect, string.Empty);
+            helpf.chatLogStyle.alignment = TextAnchor.MiddleLeft;
+
+            sttngs.dataset = GUI.TextField(recto.setdatasetrect, sttngs.dataset, helpf.chatLogStyle);
+            // if user is not careful it crashes the mod on load/save as long there is no better error handling :D :D
+            helpf.setOwnAucPath(helpf.ownmodfolder + sttngs.dataset + System.IO.Path.DirectorySeparatorChar); // maybe do this somewhere else?   
+
             // which version of scrollpost price:
             /*
             GUI.skin = helpf.cardListPopupBigLabelSkin;
