@@ -13,15 +13,15 @@ namespace Auction.mod
     {
         GetGoogleThings gglthngs;
         PlayerStore ps;
-        public string createdAuctionText="";
+        public string createdAuctionText = "";
         private int durationIndex = 0;
 
         Vector2 scrolll = new Vector2(0, 0);
         public bool wtsinah = true;//remembers which menupoint in ah was the last one
         private Auction tradeitem;
-        private bool selectable=true;
+        private bool selectable = true;
         private float opacity;
-        public Vector2 scrollPos, scrollPos2,scrollPos4;
+        public Vector2 scrollPos, scrollPos2, scrollPos4;
         Rectomat recto;
         Prices prcs;
         Cardviewer crdvwr;
@@ -127,11 +127,11 @@ namespace Auction.mod
             }
             //lstfltrs.fullupdatelist(alists.ahlist, alists.ahlistfull, this.inauchouse, this.wtsmenue, this.generator);
             helpf.targetchathightinfo.SetValue(helpf.target, (float)Screen.height * 0.25f);
-        
+
         }
 
 
-        
+
         public void drawAH()
         {
 
@@ -148,14 +148,14 @@ namespace Auction.mod
             if (helpf.offerMenuSelectCardMenu)
             {
                 //this.ccardlist(false);// want to show the sell prices
-                
+
                 this.drawgenerator();
                 return;
             }
 
             if (helpf.createAuctionMenu)
             {
-                if (OfferCard == null && Generator.Instance.getAllOwnSellOffers().Count>=1)
+                if (OfferCard == null && Generator.Instance.getAllOwnSellOffers().Count >= 1)
                 { OfferCard = Generator.Instance.getAllOwnSellOffers()[0].card; }
                 // for getting mouse wheel-scrolling in overlayed window, we have to paint it first
                 drawCreateMenu();
@@ -168,7 +168,7 @@ namespace Auction.mod
             {
                 // for getting mouse wheel-scrolling in overlayed window, we have to paint it first
                 if (helpf.showtradedialog && !(helpf.makeOfferMenu && !helpf.offerMenuSelectCardMenu)) { this.starttrading(tradeitem.seller, tradeitem.card.getName(), tradeitem.price, this.bothstarttrading, tradeitem.message, tradeitem.card.getType()); }
-                
+
                 srchsvr.setsettings(0, true);
                 ah.setSellSortMode(srchsvr.sortmode);
                 this.drawAHlist(true);
@@ -180,7 +180,7 @@ namespace Auction.mod
                     this.drawAHlist(false);
                 }
 
-                if (helpf.showtradedialog) { this.starttrading(tradeitem.seller, tradeitem.card.getName(), tradeitem.price, this.bothstarttrading, tradeitem.message,tradeitem.card.getType()); }
+                if (helpf.showtradedialog) { this.starttrading(tradeitem.seller, tradeitem.card.getName(), tradeitem.price, this.bothstarttrading, tradeitem.message, tradeitem.card.getType()); }
                 return;
             }
             // for getting mouse wheel-scrolling in overlayed window, we have to paint it first
@@ -191,13 +191,13 @@ namespace Auction.mod
 
         private void drawAHandSearch()
         {
-            
+
             bool clickableItems = false;
             // have to draw textfield in front of scrollbar or otherwise you lose focus in textfield (lol)
             if (helpf.inauchouse)
             {
 
-                
+
                 GUI.color = Color.white;
 
                 // draw filter menue
@@ -350,7 +350,7 @@ namespace Auction.mod
                     }
                 }
 
-                
+
 
                 if (growthclick) { srchsvr.growthbool = !srchsvr.growthbool; };
                 if (orderclick) { srchsvr.orderbool = !srchsvr.orderbool; }
@@ -380,9 +380,9 @@ namespace Auction.mod
 
                 if (helpf.wtsmenue)
                 {
-                    if (helpf.playerStoreMenu) srchsvr.savesettings(2, true); 
-                    else srchsvr.savesettings(0, true); 
-                } 
+                    if (helpf.playerStoreMenu) srchsvr.savesettings(2, true);
+                    else srchsvr.savesettings(0, true);
+                }
                 else { srchsvr.savesettings(0, false); }
 
                 //set filters
@@ -396,7 +396,7 @@ namespace Auction.mod
                     else
                     {
                         ah.buyOfferFilter.setTakeWTS(srchsvr.takepriceformgenarator);
-                    } 
+                    }
                 }
                 if (selfcopy != srchsvr.wtssearchstring)
                 {
@@ -423,10 +423,10 @@ namespace Auction.mod
                         ah.buyOfferFilter.setDontShowNoPrice(srchsvr.ignore0);
                     }
                 }
-                if (mt3click||mt0click)
+                if (mt3click || mt0click)
                 {
                     int filter = 0;
-                    
+
                     if (helpf.wtsmenue)
                     {
                         if (srchsvr.threebool) filter = 3;
@@ -641,7 +641,7 @@ namespace Auction.mod
                     if (helpf.wtsmenue) this.ahlist = ah.getSellOffers();
                     else this.ahlist = ah.getBuyOffers();
                 }
-                
+
 
                 DateTime currenttime = DateTime.Now;
                 // draw auctimes################################################
@@ -756,14 +756,14 @@ namespace Auction.mod
                                 ts = (current.time).Subtract(temptime);
                                 if (ts.TotalHours >= 1.0)
                                 {
-                                    sellername = ((int)ts.TotalHours+1) + " hours left";
+                                    sellername = ((int)ts.TotalHours + 1) + " hours left";
                                 }
                                 else
                                 {
 
                                     if (ts.TotalMinutes >= 1.0)
                                     {
-                                        sellername = (ts.Minutes+1) + " min left";
+                                        sellername = (ts.Minutes + 1) + " min left";
 
                                     }
                                     else
@@ -797,7 +797,7 @@ namespace Auction.mod
                                 else sellername = "seconds ago";
                             }
                         }
-                        
+
 
 
                         Rect position13 = new Rect(restyperect.xMax + 2f, position9.y, recto.labelsWidth, recto.fieldHeight);
@@ -831,25 +831,33 @@ namespace Auction.mod
                             int p1 = 0, p2 = 0;
                             if (helpf.wtsmenue)
                             {
-								p1 = prcs.getPrice(index, sttngs.wtsAHpriceType);
+                                p1 = prcs.getPrice(index, sttngs.wtsAHpriceType);
                             }
                             else
                             {
-								p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
+                                p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
                             }
-                            suggeprice = "SG: " + p1;
+                            suggeprice = "SG:" + p1;
                             if (sttngs.showsugrange)
                             {
                                 if (helpf.wtsmenue)
                                 {
-									p2 = prcs.getPrice(index, sttngs.wtsAHpriceType2);
+                                    p2 = prcs.getPrice(index, sttngs.wtsAHpriceType2);
                                 }
                                 else
                                 {
-									p2 = prcs.getPrice(index, sttngs.wtbAHpriceType2);
+                                    p2 = prcs.getPrice(index, sttngs.wtbAHpriceType2);
                                 }
                             }
                             if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
+                            if (!helpf.wtsmenue)
+                            {
+                                if (prcs.wtspricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtspricelist1[current.card.getType()])) suggeprice += " / G:" + prcs.wtspricelist1[current.card.getType()];
+                            }
+                            else
+                            {
+                                if (prcs.wtbpricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtbpricelist1[current.card.getType()])) suggeprice += " / G:" + prcs.wtbpricelist1[current.card.getType()];
+                            }
                         }
                         GUI.skin = helpf.cardListPopupSkin;
                         Rect position14 = new Rect(nextx + 2f, position9.y, recto.labelsWidth / 2f, recto.fieldHeight);
@@ -937,7 +945,7 @@ namespace Auction.mod
                 GUI.EndScrollView();
 
                 // delete old entrys
-                
+
 
                 GUI.color = Color.white;
                 // show clicked card
@@ -946,7 +954,7 @@ namespace Auction.mod
                     //this.callback.ItemButtonClicked(this, card);
                     string clink = card.getName().ToLower();
                     //int arrindex = Array.FindIndex(helpf.cardnames, element => element.Equals(clink));
-                    int arrindex= helpf.cardnameToArrayIndex(clink);
+                    int arrindex = helpf.cardnameToArrayIndex(clink);
                     if (arrindex >= 0)
                     {
 
@@ -954,7 +962,7 @@ namespace Auction.mod
                     }
 
                 }
-                
+
 
                 drawButtonsBelow();
 
@@ -964,7 +972,7 @@ namespace Auction.mod
 
                 GUI.color = Color.white;
 
-                
+
 
                 if (helpf.playerStoreMenu)
                 {
@@ -1149,8 +1157,8 @@ namespace Auction.mod
                 }
                 else
                 {
-                        if (wtsmenue) this.ahlist = ah.getSellOffers();
-                        else this.ahlist = ah.getBuyOffers();
+                    if (wtsmenue) this.ahlist = ah.getSellOffers();
+                    else this.ahlist = ah.getBuyOffers();
                 }
 
 
@@ -1192,7 +1200,7 @@ namespace Auction.mod
                     GUI.skin = helpf.cardListPopupGradientSkin;
                     //draw boxes
                     Rect position7 = recto.position7(num);
-                    
+
 
                     if (position7.yMax < testy || position7.y > testy + recto.position3.height)
                     {
@@ -1338,7 +1346,7 @@ namespace Auction.mod
                             {
                                 p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
                             }
-                            suggeprice = "SG: " + p1;
+                            suggeprice = "SG:" + p1;
                             if (sttngs.showsugrange)
                             {
                                 if (wtsmenue)
@@ -1351,6 +1359,14 @@ namespace Auction.mod
                                 }
                             }
                             if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
+                            if (!wtsmenue)
+                            {
+                                if (prcs.wtspricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtspricelist1[current.card.getType()])) suggeprice += " / G:" + prcs.wtspricelist1[current.card.getType()];
+                            }
+                            else
+                            {
+                                if (prcs.wtbpricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtbpricelist1[current.card.getType()])) suggeprice += " / G:" + prcs.wtbpricelist1[current.card.getType()];
+                            }
                         }
                         GUI.skin = helpf.cardListPopupSkin;
                         Rect position14 = new Rect(nextx + 2f, position9.y, recto.labelsWidth / 2f, recto.fieldHeight);
@@ -1460,7 +1476,7 @@ namespace Auction.mod
                 {
 
                     this.drawButtonsBelow();
-                    
+
                 }
 
                 if (!wtsmenue && helpf.createAuctionMenu)
@@ -1472,7 +1488,7 @@ namespace Auction.mod
                     }
 
                     // draw button for getting cards here!
-                    if (GUI.Button(recto.getOwnStuffButton, "GetStuff") && this.sttngs.waitForAuctionBot==false && this.sttngs.actualTrading==false)
+                    if (GUI.Button(recto.getOwnStuffButton, "GetStuff") && this.sttngs.waitForAuctionBot == false && this.sttngs.actualTrading == false)
                     {
                         string sendmessage = " \\getauc " + "profileid:" + App.MyProfile.ProfileInfo.id + ",";
                         WhisperMessage wmsg = new WhisperMessage("auctionmod", sendmessage);
@@ -1485,7 +1501,7 @@ namespace Auction.mod
                     }
                 }
 
-                GUI.color = Color.white;  
+                GUI.color = Color.white;
 
             }
             GUI.color = Color.white;
@@ -1516,29 +1532,29 @@ namespace Auction.mod
 
             drawButtonsBelow();
 
-                    if (helpf.offerMenuSelectCardMenu)
-                    {
-                        //this.ccardlist(false);// want to show the sell prices
-                        this.drawgenerator();
-                        return;
-                    }
+            if (helpf.offerMenuSelectCardMenu)
+            {
+                //this.ccardlist(false);// want to show the sell prices
+                this.drawgenerator();
+                return;
+            }
 
-                    if (this.sttngs.actualTrading)
-                    {
-                        GUI.skin = helpf.cardListPopupBigLabelSkin;
-                        GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-                        GUI.Label(recto.tbmessage, "...struggle with bot...");
-                        GUI.skin.label.alignment = TextAnchor.MiddleLeft;
-                        return;
-                    }
-                    if (this.sttngs.waitForAuctionBot)
-                    {
-                        GUI.skin = helpf.cardListPopupBigLabelSkin;
-                        GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-                        GUI.Label(recto.tbmessage, "...wait for bot...");
-                        GUI.skin.label.alignment = TextAnchor.MiddleLeft;
-                        return;
-                    }
+            if (this.sttngs.actualTrading)
+            {
+                GUI.skin = helpf.cardListPopupBigLabelSkin;
+                GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+                GUI.Label(recto.tbmessage, "...struggle with bot...");
+                GUI.skin.label.alignment = TextAnchor.MiddleLeft;
+                return;
+            }
+            if (this.sttngs.waitForAuctionBot)
+            {
+                GUI.skin = helpf.cardListPopupBigLabelSkin;
+                GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+                GUI.Label(recto.tbmessage, "...wait for bot...");
+                GUI.skin.label.alignment = TextAnchor.MiddleLeft;
+                return;
+            }
 
 
             GUI.skin = helpf.cardListPopupSkin;
@@ -1612,12 +1628,12 @@ namespace Auction.mod
 
             if (GUI.Button(recto.tbok, "OK"))
             {
-                bool offeredCardInYouPossesion=false;
-                foreach(Auction a in Generator.Instance.getAllOwnSellOffers())
+                bool offeredCardInYouPossesion = false;
+                foreach (Auction a in Generator.Instance.getAllOwnSellOffers())
                 {
-                    if(a.card == this.OfferCard){offeredCardInYouPossesion=true; break;}
+                    if (a.card == this.OfferCard) { offeredCardInYouPossesion = true; break; }
                 }
-                if (offeredCardInYouPossesion && this.OfferCard != null && this.OfferPrice!="0")
+                if (offeredCardInYouPossesion && this.OfferCard != null && this.OfferPrice != "0")
                 {
                     string duration = "12";
                     if (this.durationIndex == 1) duration = "24";
@@ -1632,13 +1648,13 @@ namespace Auction.mod
 
                 }
             }
-            
+
 
         }
 
         private void starttrading(string name, string cname, int price, bool wts, string orgmsg, int cid)
         {
-            
+
             // asks the user if he wants to trade
             GUI.skin = helpf.cardListPopupSkin;
             GUI.Box(recto.tradingbox, "");
@@ -1697,7 +1713,7 @@ namespace Auction.mod
 
                 }
             };
-            if (!this.helpf.playerStoreMenu && GUI.Button(recto.tbwhisper, "Whisper") )
+            if (!this.helpf.playerStoreMenu && GUI.Button(recto.tbwhisper, "Whisper"))
             {
                 helpf.showtradedialog = false;
                 App.ArenaChat.ChatRooms.OpenWhisperRoom(name);
@@ -1712,13 +1728,13 @@ namespace Auction.mod
             // dont know how to get a carlistpopup to work
             GUI.skin = helpf.cardListPopupSkin;
             GUI.Box(recto.innerBGRect, "");
-            
+
             GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, this.opacity * 0.3f);
             Rect innerRect = new Rect(recto.innerBGRect.x + 12f, recto.innerBGRect.y + 12f, recto.innerBGRect.width - 24f, recto.tbok.y - recto.innerBGRect.yMin - 12f);
             GUI.Box(innerRect, string.Empty);
             GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, this.opacity);
-            
-            List<Auction> offlist=null;
+
+            List<Auction> offlist = null;
 
             if (!wtsmenue) offlist = Generator.Instance.getAllOwnSellOffers(); // all cards YOU own ( the other user wants to buy
             else offlist = Generator.Instance.getAllOwnBuyOffers(); // all cards available
@@ -1733,7 +1749,7 @@ namespace Auction.mod
 
                 GUI.skin = helpf.cardListPopupGradientSkin;
                 //draw boxes
-                Rect position7 = new Rect(recto.cardWidth + 10f, (float)num * recto.fieldHeight, innerRect.width - recto.scrollBarSize  - recto.costIconWidth - 12f, recto.fieldHeight);
+                Rect position7 = new Rect(recto.cardWidth + 10f, (float)num * recto.fieldHeight, innerRect.width - recto.scrollBarSize - recto.costIconWidth - 12f, recto.fieldHeight);
 
                 if (position7.yMax < testy || position7.y > testy + innerRect.height)
                 {
@@ -1743,11 +1759,11 @@ namespace Auction.mod
                 else
                 {
 
-                        if (GUI.Button(position7, string.Empty))
-                        {
-                            card = current.card;
-                            //this.callback.ItemClicked(this, current);
-                        }
+                    if (GUI.Button(position7, string.Empty))
+                    {
+                        card = current.card;
+                        //this.callback.ItemClicked(this, current);
+                    }
 
 
 
@@ -1773,77 +1789,85 @@ namespace Auction.mod
 
 
 
-                        if (sttngs.shownumberscrolls) name = "(" + helpf.cardIDToNumberOwned[current.card.getType()] + ") " + name;
-                        GUI.skin = helpf.cardListPopupBigLabelSkin;
-                        GUI.skin.label.alignment = TextAnchor.MiddleLeft;
-                        vector = GUI.skin.label.CalcSize(new GUIContent(name));
+                    if (sttngs.shownumberscrolls) name = "(" + helpf.cardIDToNumberOwned[current.card.getType()] + ") " + name;
+                    GUI.skin = helpf.cardListPopupBigLabelSkin;
+                    GUI.skin.label.alignment = TextAnchor.MiddleLeft;
+                    vector = GUI.skin.label.CalcSize(new GUIContent(name));
 
 
-                        float nextx = position10.xMax + 8f;
-                        //drawcardname
-                        Rect position12 = new Rect(nextx + 2f, (float)num * recto.fieldHeight - 3f + recto.fieldHeight * 0.01f, recto.labelsWidth, recto.cardHeight);
+                    float nextx = position10.xMax + 8f;
+                    //drawcardname
+                    Rect position12 = new Rect(nextx + 2f, (float)num * recto.fieldHeight - 3f + recto.fieldHeight * 0.01f, recto.labelsWidth, recto.cardHeight);
 
-                        GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-                        GUI.Label(position12, (vector.x >= position12.width) ? (name.Substring(0, Mathf.Min(name.Length, recto.maxCharsName)) + "...") : name);
-                        GUI.skin.label.alignment = TextAnchor.MiddleLeft;
-                        GUI.skin = helpf.cardListPopupSkin;
-                        string text = current.card.getPieceKind().ToString();
-                        string str = text.Substring(0, 1) + text.Substring(1).ToLower();
-                        string text2 = string.Empty;
-                        int num2 = recto.maxCharsRK;
-                        if (current.card.level > 0)
+                    GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+                    GUI.Label(position12, (vector.x >= position12.width) ? (name.Substring(0, Mathf.Min(name.Length, recto.maxCharsName)) + "...") : name);
+                    GUI.skin.label.alignment = TextAnchor.MiddleLeft;
+                    GUI.skin = helpf.cardListPopupSkin;
+                    string text = current.card.getPieceKind().ToString();
+                    string str = text.Substring(0, 1) + text.Substring(1).ToLower();
+                    string text2 = string.Empty;
+                    int num2 = recto.maxCharsRK;
+                    if (current.card.level > 0)
+                    {
+                        string text3 = text2;
+                        text2 = string.Concat(new object[] { text3, "<color=#ddbb44>Tier ", current.card.level + 1, "</color>, " });
+                        num2 += "<color=#rrggbb></color>".Length;
+                    }
+                    text2 = text2 + current.card.getRarityString() + ", " + str;
+                    Vector2 vector2 = GUI.skin.label.CalcSize(new GUIContent(text2));
+
+                    //draw cardsubstring
+                    Rect position13 = new Rect(nextx + 2f, (float)num * recto.fieldHeight - 3f + recto.fieldHeight * 0.57f, recto.labelsWidth, recto.fieldHeight);
+                    GUI.skin.label.alignment = TextAnchor.UpperCenter;
+                    GUI.Label(position13, (vector2.x >= position13.width) ? (text2.Substring(0, Mathf.Min(text2.Length, num2)) + "...") : text2);
+                    GUI.skin.label.alignment = TextAnchor.UpperLeft;
+
+                    // draw suggested price
+                    //int index = Array.FindIndex(helpf.cardids, element => element == current.card.getType());
+                    int index = helpf.cardidToArrayIndex(current.card.getType());
+                    string suggeprice = "";
+                    if (index >= 0)
+                    {
+                        int p1 = 0, p2 = 0;
+                        if (wtsmenue)
                         {
-                            string text3 = text2;
-                            text2 = string.Concat(new object[] { text3, "<color=#ddbb44>Tier ", current.card.level + 1, "</color>, " });
-                            num2 += "<color=#rrggbb></color>".Length;
+                            p1 = prcs.getPrice(index, sttngs.wtsAHpriceType);
                         }
-                        text2 = text2 + current.card.getRarityString() + ", " + str;
-                        Vector2 vector2 = GUI.skin.label.CalcSize(new GUIContent(text2));
-
-                        //draw cardsubstring
-                        Rect position13 = new Rect(nextx + 2f, (float)num * recto.fieldHeight - 3f + recto.fieldHeight * 0.57f, recto.labelsWidth, recto.fieldHeight);
-                        GUI.skin.label.alignment = TextAnchor.UpperCenter;
-                        GUI.Label(position13, (vector2.x >= position13.width) ? (text2.Substring(0, Mathf.Min(text2.Length, num2)) + "...") : text2);
-                        GUI.skin.label.alignment = TextAnchor.UpperLeft;
-
-                        // draw suggested price
-                        //int index = Array.FindIndex(helpf.cardids, element => element == current.card.getType());
-                        int index = helpf.cardidToArrayIndex(current.card.getType());
-                        string suggeprice = "";
-                        if (index >= 0)
+                        else
                         {
-                            int p1 = 0, p2 = 0;
+                            p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
+                        }
+                        suggeprice = "SG:" + p1;
+                        if (sttngs.showsugrange)
+                        {
                             if (wtsmenue)
                             {
-                                p1 = prcs.getPrice(index, sttngs.wtsAHpriceType);
+                                p2 = prcs.getPrice(index, sttngs.wtsAHpriceType2);
                             }
                             else
                             {
-                                p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
+                                p2 = prcs.getPrice(index, sttngs.wtbAHpriceType2);
                             }
-                            suggeprice = "SG: " + p1;
-                            if (sttngs.showsugrange)
-                            {
-                                if (wtsmenue)
-                                {
-                                    p2 = prcs.getPrice(index, sttngs.wtsAHpriceType2);
-                                }
-                                else
-                                {
-                                    p2 = prcs.getPrice(index, sttngs.wtbAHpriceType2);
-                                }
-                            }
-                            if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
                         }
-                        nextx = position12.xMax + recto.costIconWidth;
-                        GUI.skin = helpf.cardListPopupBigLabelSkin;
-                        Rect position14 = new Rect(nextx + 2f, position12.y, recto.labelsWidth / 2f, recto.fieldHeight);
-                        GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-                        GUI.Label(position14, suggeprice);
-                        GUI.skin.label.alignment = TextAnchor.MiddleLeft;
-                    
+                        if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
+                        if (!wtsmenue)
+                        {
+                            if (prcs.wtspricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtspricelist1[current.card.getType()])) suggeprice += " / G:" + prcs.wtspricelist1[current.card.getType()];
+                        }
+                        else
+                        {
+                            if (prcs.wtbpricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtbpricelist1[current.card.getType()])) suggeprice += " / G:" + prcs.wtbpricelist1[current.card.getType()];
+                        }
+                    }
+                    nextx = position12.xMax + recto.costIconWidth;
+                    GUI.skin = helpf.cardListPopupBigLabelSkin;
+                    Rect position14 = new Rect(nextx + 2f, position12.y, recto.labelsWidth / 2f, recto.fieldHeight);
+                    GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+                    GUI.Label(position14, suggeprice);
+                    GUI.skin.label.alignment = TextAnchor.MiddleLeft;
 
-                   
+
+
                     GUI.skin.label.alignment = TextAnchor.MiddleLeft;
                     num++;
                 }
@@ -1961,8 +1985,8 @@ namespace Auction.mod
 
                     srchsvr.resetpssearchsettings(helpf.wtsmenue);
                 }
-                
-                 
+
+
 
                 if (selfcopy != srchsvr.wtssearchstring)
                 {
@@ -2101,15 +2125,15 @@ namespace Auction.mod
                         int p1 = 0, p2 = 0;
                         if (index >= 0)
                         {
-                            
+
                             //p1 = prcs.getPrice(index, sttngs.wtsAHpriceType);
-                             p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
+                            p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
                             suggeprice = "SG: " + p1;
                             if (sttngs.showsugrange)
                             {
-                                
+
                                 //    p2 = prcs.getPrice(index, sttngs.wtsAHpriceType2);
-                                    p2 = prcs.getPrice(index, sttngs.wtbAHpriceType2);
+                                p2 = prcs.getPrice(index, sttngs.wtbAHpriceType2);
                             }
                             if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
                         }
@@ -2157,7 +2181,7 @@ namespace Auction.mod
                 GUI.color = Color.white;
                 GUI.skin = helpf.cardListPopupBigLabelSkin;
                 GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-                GUI.Label(recto.footlinerect,"Select a Scroll you want to sell!");
+                GUI.Label(recto.footlinerect, "Select a Scroll you want to sell!");
                 GUI.skin.label.alignment = TextAnchor.MiddleLeft;
 
                 if (card != null)
@@ -2172,12 +2196,12 @@ namespace Auction.mod
                     }
                 }
 
-                if (clickcard != null) 
-                { 
-                    this.OfferCard = clickcard; 
-                    helpf.offerMenuSelectCardMenu = false; 
-                    this.OfferPrice = "1000"; 
-                    recto.setupPositionsboth(helpf.chatisshown, sttngs.rowscale, helpf.chatLogStyle, helpf.cardListPopupSkin); 
+                if (clickcard != null)
+                {
+                    this.OfferCard = clickcard;
+                    helpf.offerMenuSelectCardMenu = false;
+                    this.OfferPrice = "1000";
+                    recto.setupPositionsboth(helpf.chatisshown, sttngs.rowscale, helpf.chatLogStyle, helpf.cardListPopupSkin);
                 }
                 //wts / wtb menue buttons
 
@@ -2291,7 +2315,7 @@ namespace Auction.mod
                 ah.setSellSortMode(srchsvr.sortmode);
                 recto.setupPositions(helpf.chatisshown, sttngs.rowscale, helpf.chatLogStyle, helpf.cardListPopupSkin);
 
-                if(this.gglthngs.workthreadready) new Thread(new ThreadStart(this.gglthngs.workthread)).Start();
+                if (this.gglthngs.workthreadready) new Thread(new ThreadStart(this.gglthngs.workthread)).Start();
 
             }
 
@@ -2307,7 +2331,7 @@ namespace Auction.mod
                 //recto.setupPositions(helpf.chatisshown, sttngs.rowscale, helpf.chatLogStyle, helpf.cardListPopupSkin);
             }
             GUI.color = Color.white;
- 
+
         }
 
         public void PopupOk(string popupType)
@@ -2324,7 +2348,7 @@ namespace Auction.mod
                 string sendmessage = " \\setauc " + "profileid:" + App.MyProfile.ProfileInfo.id + ", cardid:" + cardid + ", cardtype:" + cid + ", price:" + this.OfferPrice + ", duration:" + duration + "h" + ",";
                 WhisperMessage wmsg = new WhisperMessage("auctionmod", sendmessage);
                 this.sttngs.waitForAuctionBot = true;
-                
+
                 this.sttngs.waitForAuctionBot = true;
                 App.Communicator.sendRequest(wmsg);
                 this.sttngs.AucBotMode = "setauc";

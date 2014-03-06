@@ -446,7 +446,7 @@ namespace Auction.mod
                                 //string cardname = helpf.cardnames[Array.FindIndex(helpf.cardids, element => element == Convert.ToInt32(w.Split(' ')[0]))];
                                 //prcs.wtspricelist1[Convert.ToInt32(w.Split(' ')[0])] = w.Split(' ')[1];
                             }
-                            generatewtxmsg(generator.getAllOwnSellOffers());
+                            //generatewtxmsg(generator.getAllOwnSellOffers());
                         }
 
 
@@ -904,20 +904,20 @@ namespace Auction.mod
             {
                 Auction ai = postlist[i];
 
-                if (msg.Length + ai.card.getName().Length + 1 + ai.price.ToString().Length > 506)// check if the element and the price still fits in the chat-message
-                {
-                    if (priceToAdd > 0)
-                    { 
-                        msg = msg.Substring(0,msg.Length-2)+ " " + ai.price + "g;";
-                        shortmsg = shortmsg.Substring(0, shortmsg.Length - 1) + " " + ai.price + ";";
-                    }
-                    if (priceToAdd == 0) {
-                        msg = msg.Substring(0, msg.Length - 2) + ";";
-                        shortmsg = shortmsg.Substring(0, shortmsg.Length - 1) +";";
-                    }
-                    messageWouldBeTooLong = true;
-                    break;
-                }
+                //if (msg.Length + ai.card.getName().Length + 1 + ai.price.ToString().Length > 506)// check if the element and the price still fits in the chat-message
+                //{
+                //    if (priceToAdd > 0)
+                //    { 
+                //        msg = msg.Substring(0,msg.Length-2)+ " " + ai.price + "g;";
+                //        shortmsg = shortmsg.Substring(0, shortmsg.Length - 1) + " " + ai.price + ";";
+                //    }
+                //    if (priceToAdd == 0) {
+                //        msg = msg.Substring(0, msg.Length - 2) + ";";
+                //        shortmsg = shortmsg.Substring(0, shortmsg.Length - 1) +";";
+                //    }
+                //    messageWouldBeTooLong = true;
+                //    break;
+                //}
 
                 if (i < postlist.Count - 1 && postlist[i + 1].price == ai.price)
                 {
@@ -931,8 +931,8 @@ namespace Auction.mod
 
                     if (ai.price == 0)
                     {
-                        msg = msg + ai.card.getName() + ";";
-                        shortmsg = shortmsg + ai.card.getType() + ";";
+                        //msg = msg + ai.card.getName() + ";";
+                        //shortmsg = shortmsg + ai.card.getType() + ";";
                     }
                     else
                     {
@@ -948,14 +948,15 @@ namespace Auction.mod
             {
                 if (helpf.wtsmenue) { msg = "WTS " + msg; shortmsg = "aucs " + shortmsg; } else { msg = "WTB " + msg; shortmsg = "aucb " + shortmsg; }
                 if (msg.EndsWith(" ")) { msg = msg.Remove(msg.Length - 2); } else { msg = msg.Remove(msg.Length - 1); }
-                shortmsg = shortmsg.Remove(shortmsg.Length - 1);
+                //shortmsg = shortmsg.Remove(shortmsg.Length - 1);
             }
             if (messageWouldBeTooLong)
             {
                 App.Popups.ShowOk(this, "msgToLongMessage", "Message too Long", "Your generated message is too long.\r\nThe message was shortened.", "OK");
             }
-            if (msg.Length < 512) systemCopyBufferProperty.SetValue(null, msg, null);
-            if (msg.Length >= 512) { msg = "msg too long"; } // message cant be to long anymore :D
+            //if (msg.Length < 512) systemCopyBufferProperty.SetValue(null, msg, null);
+            systemCopyBufferProperty.SetValue(null, msg, null);
+            //if (msg.Length >= 512) { msg = "msg too long"; } // message cant be to long anymore :D
             //if (shortmsg.Length >= 512) { shortmsg = ""; msg = msg + ", networkmsg too"; }
             if (helpf.wtsmenue) { srchsvr.generatedwtsmessage = msg; srchsvr.shortgeneratedwtsmessage = shortmsg; } else { srchsvr.generatedwtbmessage = msg; srchsvr.shortgeneratedwtbmessage = shortmsg; }
             //Console.WriteLine(msg);
