@@ -213,3 +213,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+*.csproj
+Auction.mod.csproj
+Auction.mod.csproj
