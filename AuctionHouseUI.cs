@@ -840,7 +840,7 @@ namespace Auction.mod
                             {
 								p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
                             }
-                            suggeprice = "SG: " + p1;
+                            suggeprice = "SG:" + p1;
                             if (sttngs.showsugrange)
                             {
                                 if (helpf.wtsmenue)
@@ -852,7 +852,25 @@ namespace Auction.mod
 									p2 = prcs.getPrice(index, sttngs.wtbAHpriceType2);
                                 }
                             }
-                            if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
+                            if (sttngs.showsugrange && p1 != p2) suggeprice = "SG:" + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
+                            if (!helpf.wtsmenue)
+                            {
+                                if (prcs.wtspricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtspricelist1[current.card.getType()]))
+                                {
+                                    string myprice = prcs.wtspricelist1[current.card.getType()];
+                                    suggeprice += " / G:" + myprice;
+                                    if (current.price >= int.Parse(myprice)) suggeprice += "(!)";
+                                }
+                            }
+                            else
+                            {
+                                if (prcs.wtbpricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtbpricelist1[current.card.getType()]))
+                                {
+                                    string myprice = prcs.wtbpricelist1[current.card.getType()];
+                                    suggeprice += " / G:" + myprice;
+                                    if (current.price <= int.Parse(myprice)) suggeprice += "(!)";
+                                }
+                            }
                         }
                         GUI.skin = helpf.cardListPopupSkin;
                         Rect position14 = new Rect(nextx + 2f, position9.y, recto.labelsWidth / 2f, recto.fieldHeight);
@@ -1356,7 +1374,7 @@ namespace Auction.mod
                             {
                                 p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
                             }
-                            suggeprice = "SG: " + p1;
+                            suggeprice = "SG:" + p1;
                             if (sttngs.showsugrange)
                             {
                                 if (wtsmenue)
@@ -1369,6 +1387,24 @@ namespace Auction.mod
                                 }
                             }
                             if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
+                            if (!wtsmenue)
+                            {
+                                if (prcs.wtspricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtspricelist1[current.card.getType()]))
+                                {
+                                    string myprice = prcs.wtspricelist1[current.card.getType()];
+                                    suggeprice += " / G:" + myprice;
+                                    if (current.price >= int.Parse(myprice)) suggeprice += "(!)";
+                                }
+                            }
+                            else
+                            {
+                                if (prcs.wtbpricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtbpricelist1[current.card.getType()]))
+                                {
+                                    string myprice = prcs.wtbpricelist1[current.card.getType()];
+                                    suggeprice += " / G:" + myprice;
+                                    if (current.price <= int.Parse(myprice)) suggeprice += "(!)";
+                                }
+                            }
                         }
                         GUI.skin = helpf.cardListPopupSkin;
                         Rect position14 = new Rect(nextx + 2f, position9.y, recto.labelsWidth / 2f, recto.fieldHeight);
@@ -1929,7 +1965,7 @@ namespace Auction.mod
                             {
                                 p1 = prcs.getPrice(index, sttngs.wtbAHpriceType);
                             }
-                            suggeprice = "SG: " + p1;
+                            suggeprice = "SG:" + p1;
                             if (sttngs.showsugrange)
                             {
                                 if (wtsmenue)
@@ -1942,6 +1978,24 @@ namespace Auction.mod
                                 }
                             }
                             if (sttngs.showsugrange && p1 != p2) suggeprice = "SG: " + Math.Min(p1, p2) + "-" + Math.Max(p1, p2);
+                            if (!wtsmenue)
+                            {
+                                if (prcs.wtspricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtspricelist1[current.card.getType()]))
+                                {
+                                    string myprice = prcs.wtspricelist1[current.card.getType()];
+                                    suggeprice += " / G:" + myprice;
+                                    if (current.price >= int.Parse(myprice)) suggeprice += "(!)";
+                                }
+                            }
+                            else
+                            {
+                                if (prcs.wtbpricelist1.ContainsKey(current.card.getType()) && !String.IsNullOrEmpty(prcs.wtbpricelist1[current.card.getType()]))
+                                {
+                                    string myprice = prcs.wtbpricelist1[current.card.getType()];
+                                    suggeprice += " / G:" + myprice;
+                                    if (current.price <= int.Parse(myprice)) suggeprice += "(!)";
+                                }
+                            }
                         }
                         nextx = position12.xMax + recto.costIconWidth;
                         GUI.skin = helpf.cardListPopupBigLabelSkin;
